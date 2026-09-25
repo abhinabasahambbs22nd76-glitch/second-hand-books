@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, UserPlus, Layers, ShoppingCart, Wallet } from "lucide-react";
+import { UserPlus, Layers, ShoppingCart, Wallet, Lock } from "lucide-react";
+import { useAuthLock } from "@/context/AuthLockContext";
 
 interface NavItem {
   name: string;
@@ -22,6 +23,7 @@ const NAV_ITEMS: NavItem[] = [
 export default function Navbar() {
   const pathname = usePathname() || "/";
   const [currentTime, setCurrentTime] = useState("");
+  const { lock } = useAuthLock();
 
   useEffect(() => {
     const update = () =>
@@ -68,9 +70,20 @@ export default function Navbar() {
         })}
       </nav>
 
-      {/* Clock */}
-      <div className="hidden sm:block text-xs font-mono bg-slate-900/60 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
-        {currentTime || "—"}
+      {/* Right Area: Clock & Lock App Button */}
+      <div className="flex items-center gap-2">
+        <div className="hidden sm:block text-xs font-mono bg-slate-900/60 px-3 py-1.5 rounded border border-slate-700 text-slate-300">
+          {currentTime || "—"}
+        </div>
+
+        <button
+          onClick={lock}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-slate-900/60 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold transition cursor-pointer"
+          title="Lock POS Application"
+        >
+          <Lock className="w-3.5 h-3.5 text-amber-400" />
+          <span className="hidden sm:inline">Lock App</span>
+        </button>
       </div>
     </header>
   );

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import { AuthLockProvider } from "@/context/AuthLockContext";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -37,8 +38,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="theme-color" content="#1e293b" />
       </head>
       <body className="min-h-full flex flex-col bg-gray-50 text-gray-900">
-        <Navbar />
-        <div className="flex-1 flex flex-col">{children}</div>
+        <AuthLockProvider>
+          <Navbar />
+          <div className="flex-1 flex flex-col">{children}</div>
+        </AuthLockProvider>
       </body>
     </html>
   );
