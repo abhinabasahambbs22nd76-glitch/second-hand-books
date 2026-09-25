@@ -1,7 +1,7 @@
 {
   "name": "MEDICOESSENTIALS Second-Hand Book POS",
   "short_name": "Adwait's Book POS",
-  "description": "Point of Sale and Consignment Manager for Used Medical Textbooks — DH KUSMS",
+  "description": "Point of Sale and Seller Manager for Used Medical Textbooks — DH KUSMS",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
